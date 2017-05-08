@@ -1,0 +1,1374 @@
+version=53;
+class EditorData
+{
+	moveGridStep=1;
+	angleGridStep=0.2617994;
+	scaleGridStep=1;
+	autoGroupingDist=10;
+	toggles=1674;
+	class ItemIDProvider
+	{
+		nextID=84;
+	};
+	class MarkerIDProvider
+	{
+		nextID=8;
+	};
+	class LayerIndexProvider
+	{
+		nextID=4;
+	};
+	class Camera
+	{
+		pos[]={5682.0825,73.449036,10344.623};
+		dir[]={-0.52399164,-0.81446999,0.24916913};
+		up[]={-0.73554796,0.58019638,0.34976888};
+		aside[]={0.42944354,7.6019205e-008,0.90310252};
+	};
+};
+binarizationWanted=0;
+addons[]=
+{
+	"A3_Characters_F_Exp_Civil",
+	"A3_Weapons_F",
+	"A3_Characters_F",
+	"A3_Characters_F_Exp",
+	"A3_Weapons_F_Items",
+	"A3_Soft_F_Gamma_Hatchback_01",
+	"A3_Ui_F",
+	"A3_Soft_F_Gamma_SUV_01",
+	"A3_Structures_F_Bootcamp_Civ_SportsGrounds",
+	"A3_Structures_F_Bootcamp_Items_Electronics",
+	"A3_Structures_F_Furniture",
+	"A3_Structures_F_Bootcamp_Items_Sport"
+};
+class AddonsMetaData
+{
+	class List
+	{
+		items=7;
+		class Item0
+		{
+			className="A3_Characters_F_Exp";
+			name="Arma 3 Apex - Characters and Clothing";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item1
+		{
+			className="A3_Weapons_F";
+			name="Arma 3 Alpha - Weapons and Accessories";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item2
+		{
+			className="A3_Characters_F";
+			name="Arma 3 Alpha - Characters and Clothing";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item3
+		{
+			className="A3_Soft_F_Gamma";
+			name="Arma 3 - Unarmored Land Vehicles";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item4
+		{
+			className="A3_Ui_F";
+			name="Arma 3 - User Interface";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item5
+		{
+			className="A3_Structures_F_Bootcamp";
+			name="Arma 3 Bootcamp Update - Buildings and Structures";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item6
+		{
+			className="A3_Structures_F";
+			name="Arma 3 - Buildings and Structures";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+	};
+};
+randomSeed=3138779;
+class ScenarioData
+{
+	author="$(dingus)";
+};
+class Mission
+{
+	class Intel
+	{
+		briefingName="Civilian Driver";
+		timeOfChanges=1800.0002;
+		startWeather=0.30000001;
+		startWind=0.1;
+		startWaves=0.1;
+		forecastWeather=0;
+		forecastWind=0.1;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+		year=2035;
+		month=9;
+		day=6;
+		hour=17;
+		minute=11;
+		startFogBase=250;
+		forecastFogBase=250;
+		startFogDecay=0.014;
+		forecastFogDecay=0.014;
+	};
+	class Entities
+	{
+		items=45;
+		class Item0
+		{
+			dataType="Group";
+			side="Civilian";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={5640.2495,2.2114589,10345.13};
+						angles[]={0,5.0996952,0};
+					};
+					side="Civilian";
+					flags=7;
+					class Attributes
+					{
+						name="driver1";
+						isPlayer=1;
+						class Inventory
+						{
+							class uniform
+							{
+								typeName="U_C_Man_casual_1_F";
+								isBackpack=0;
+								class ItemCargo
+								{
+									items=1;
+									class Item0
+									{
+										name="FirstAidKit";
+										count=2;
+									};
+								};
+							};
+							map="ItemMap";
+							compass="ItemCompass";
+							watch="ItemWatch";
+							goggles="G_Aviator";
+						};
+					};
+					id=1;
+					type="C_Man_casual_1_F_tanoan";
+					atlOffset=2.0027161e-005;
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property="speaker";
+							expression="_this setspeaker _value;";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"STRING"
+										};
+									};
+									value="Male03FRE";
+								};
+							};
+						};
+						class Attribute1
+						{
+							property="pitch";
+							expression="_this setpitch _value;";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"SCALAR"
+										};
+									};
+									value=1;
+								};
+							};
+						};
+						nAttributes=2;
+					};
+				};
+			};
+			class Attributes
+			{
+			};
+			id=0;
+			atlOffset=2.0027161e-005;
+		};
+		class Item1
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={5638.1528,3.6600847,10345.597};
+				angles[]={0,3.4940002,0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				name="car1";
+			};
+			id=4;
+			type="C_Hatchback_01_sport_F";
+			atlOffset=-3.9100647e-005;
+		};
+		class Item2
+		{
+			dataType="Trigger";
+			position[]={5645.7617,7.5960002,10374.568};
+			angle=1.9881705;
+			class Attributes
+			{
+				name="tArrivedAtFishDocks";
+				text="Arrived at Fishdocks";
+				onActivation="[""fishdocks""] call dingus_fnc_arrivedAtLocation;";
+				onDeactivation="[""fishdocks""] call dingus_fnc_departedLocation;";
+				sizeA=32.598324;
+				sizeB=12.704721;
+				sizeC=5.6090002;
+				repeatable=1;
+				isRectangle=1;
+			};
+			id=13;
+			type="EmptyDetectorAreaR50";
+			atlOffset=1.6899834;
+		};
+		class Item3
+		{
+			dataType="Marker";
+			position[]={5634.7139,0,10347.008};
+			name="fishdocks_pickup";
+			type="Empty";
+			angle=108.42799;
+			id=14;
+			atlOffset=-2.21;
+		};
+		class Item4
+		{
+			dataType="Group";
+			side="Civilian";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={5634.604,2.2114389,10347.108};
+						angles[]={0,1.903648,0};
+					};
+					side="Civilian";
+					flags=7;
+					class Attributes
+					{
+						name="passenger1";
+					};
+					id=16;
+					type="C_man_polo_4_F_afro";
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property="pitch";
+							expression="_this setpitch _value;";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"SCALAR"
+										};
+									};
+									value=0.98000002;
+								};
+							};
+						};
+						nAttributes=1;
+					};
+				};
+			};
+			class Attributes
+			{
+			};
+			id=15;
+		};
+		class Item5
+		{
+			dataType="Group";
+			side="Civilian";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={5791.6719,4.4928246,10210.856};
+						angles[]={0,5.3053994,0};
+					};
+					side="Civilian";
+					flags=7;
+					class Attributes
+					{
+						name="passenger2";
+					};
+					id=18;
+					type="C_man_polo_1_F_afro";
+					atlOffset=0.11199999;
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property="pitch";
+							expression="_this setpitch _value;";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"SCALAR"
+										};
+									};
+									value=1.03;
+								};
+							};
+						};
+						nAttributes=1;
+					};
+				};
+			};
+			class Attributes
+			{
+			};
+			id=17;
+			atlOffset=0.11199999;
+		};
+		class Item6
+		{
+			dataType="Marker";
+			position[]={5791.6099,0,10210.813};
+			name="georgetownchurch_pickup";
+			type="Empty";
+			angle=300.84201;
+			id=19;
+			atlOffset=-4.3784389;
+		};
+		class Item7
+		{
+			dataType="Trigger";
+			position[]={5791.1831,4.3979998,10198.422};
+			angle=0.69120276;
+			class Attributes
+			{
+				name="tArrivedAtgeorgetownchuch";
+				text="Arrived at Georgetown Church";
+				onActivation="[""georgetownchurch""] call dingus_fnc_arrivedAtLocation;";
+				onDeactivation="[""georgetownchurch""] call dingus_fnc_departedLocation;";
+				sizeA=13.705889;
+				sizeB=16.712223;
+				sizeC=5;
+				repeatable=1;
+				isRectangle=1;
+			};
+			id=20;
+			type="EmptyDetectorArea10x10";
+			atlOffset=-0.09300375;
+		};
+		class Item8
+		{
+			dataType="Group";
+			side="Civilian";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={5773.0791,4.5063171,10614.988};
+						angles[]={0,1.5733794,0};
+					};
+					side="Civilian";
+					flags=7;
+					class Attributes
+					{
+						name="passenger3";
+					};
+					id=22;
+					type="C_man_sport_3_F_afro";
+					atlOffset=0.048305511;
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property="pitch";
+							expression="_this setpitch _value;";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"SCALAR"
+										};
+									};
+									value=1;
+								};
+							};
+						};
+						nAttributes=1;
+					};
+				};
+			};
+			class Attributes
+			{
+			};
+			id=21;
+			atlOffset=0.048305511;
+		};
+		class Item9
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={5770.2925,5.9864621,10597.727};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=23;
+			type="C_SUV_01_F";
+		};
+		class Item10
+		{
+			dataType="Group";
+			side="Civilian";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={5764.437,4.4490852,10613.546};
+						angles[]={0,2.7050509,0};
+					};
+					side="Civilian";
+					flags=7;
+					class Attributes
+					{
+						name="passenger4";
+					};
+					id=25;
+					type="C_Man_casual_3_F_euro";
+					atlOffset=0.00028562546;
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property="pitch";
+							expression="_this setpitch _value;";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"SCALAR"
+										};
+									};
+									value=0.95999998;
+								};
+							};
+						};
+						nAttributes=1;
+					};
+				};
+			};
+			class Attributes
+			{
+			};
+			id=24;
+			atlOffset=0.00028562546;
+		};
+		class Item11
+		{
+			dataType="Marker";
+			position[]={5661.1182,0,10393.472};
+			name="m_fishdocks";
+			type="Empty";
+			id=26;
+			atlOffset=-2.21;
+		};
+		class Item12
+		{
+			dataType="Marker";
+			position[]={5788.9351,0,10214.174};
+			name="m_georgetownchurch";
+			type="Empty";
+			id=27;
+			atlOffset=-4.3499999;
+		};
+		class Item13
+		{
+			dataType="Marker";
+			position[]={5762.5249,0,10609.484};
+			name="m_kuntismart";
+			type="Empty";
+			id=28;
+			atlOffset=-4.2938671;
+		};
+		class Item14
+		{
+			dataType="Trigger";
+			position[]={5766.6377,4.3604889,10608.049};
+			angle=6.2209921;
+			class Attributes
+			{
+				name="tArrivedAtkuntismart";
+				text="Arrived at Kuntis Mart";
+				onActivation="[""kuntismart""] call dingus_fnc_arrivedAtLocation;";
+				onDeactivation="[""kuntismart""] call dingus_fnc_departedLocation;";
+				sizeA=10.19;
+				sizeB=7.9605913;
+				sizeC=5;
+				repeatable=1;
+				isRectangle=1;
+			};
+			id=29;
+			type="EmptyDetectorArea10x10";
+			atlOffset=0.0059475899;
+		};
+		class Item15
+		{
+			dataType="Marker";
+			position[]={5764.4492,0,10613.468};
+			name="kuntismart_pickup";
+			type="Empty";
+			angle=178.54495;
+			id=30;
+			atlOffset=-4.3326273;
+		};
+		class Item16
+		{
+			dataType="Trigger";
+			position[]={5632.6021,2.21,10342.408};
+			class Attributes
+			{
+				text="On Load";
+				condition="true";
+				onActivation="[player] call dingus_fnc_AddPassengerUnloadAction;";
+				sizeA=0;
+				sizeB=0;
+				timeout[]={1,1,1};
+			};
+			id=31;
+			type="EmptyDetector";
+		};
+		class Item17
+		{
+			dataType="Trigger";
+			position[]={5634.2422,2.21,10342.309};
+			class Attributes
+			{
+				text="Vehicle Changed";
+				condition="vehicle player != player";
+				onActivation="[] call dingus_fnc_PlayerVehicleChanged";
+				sizeA=0;
+				sizeB=0;
+				repeatable=1;
+			};
+			id=32;
+			type="EmptyDetector";
+		};
+		class Item18
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={5824.4995,8.7006865,10519.288};
+				angles[]={0,5.9457936,0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=33;
+			type="Land_GymRack_03_F";
+		};
+		class Item19
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={5826.4243,8.7486038,10519.205};
+				angles[]={6.2795806,0.2687107,0.0010918301};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=34;
+			type="Land_GymRack_02_F";
+		};
+		class Item20
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={5821.3647,9.2121668,10516.956};
+				angles[]={0,5.731339,0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=35;
+			type="Land_GymRack_01_F";
+		};
+		class Item21
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={5823.5112,8.7072992,10517.57};
+				angles[]={0,5.7474375,0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=36;
+			type="Land_GymBench_01_F";
+		};
+		class Item22
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={5829.8071,8.8500576,10515.784};
+				angles[]={0,1.0643204,0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=38;
+			type="Land_WaterCooler_01_new_F";
+		};
+		class Item23
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={5828.0869,8.1179848,10516.508};
+				angles[]={0,1.0452346,0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=39;
+			type="Land_CashDesk_F";
+		};
+		class Item24
+		{
+			dataType="Layer";
+			name="Layer 1";
+			class Entities
+			{
+				items=12;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={5830.3335,8.8136292,10514.929};
+						angles[]={0,1.0591376,0};
+					};
+					side="Empty";
+					class Attributes
+					{
+						createAsSimpleObject=1;
+					};
+					id=37;
+					type="Land_Trophy_01_gold_F";
+					atlOffset=0.55118179;
+				};
+				class Item1
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={5830.2896,9.0179844,10514.936};
+						angles[]={0,1.0526805,0};
+					};
+					side="Empty";
+					flags=4;
+					class Attributes
+					{
+						createAsSimpleObject=1;
+					};
+					id=40;
+					type="Land_Metal_rack_F";
+				};
+				class Item2
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={5830.1162,9.2673664,10515.243};
+						angles[]={0,1.0490702,0};
+					};
+					side="Empty";
+					class Attributes
+					{
+						createAsSimpleObject=1;
+					};
+					id=41;
+					type="Land_Trophy_01_gold_F";
+					atlOffset=1.0049191;
+				};
+				class Item3
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={5830.4761,8.3683214,10514.61};
+						angles[]={0,1.079595,0};
+					};
+					side="Empty";
+					flags=4;
+					class Attributes
+					{
+						createAsSimpleObject=1;
+					};
+					id=42;
+					type="Land_Trophy_01_gold_F";
+					atlOffset=0.10587406;
+				};
+				class Item4
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={5830.1279,8.3652687,10515.242};
+						angles[]={0,1.079595,0};
+					};
+					side="Empty";
+					flags=4;
+					class Attributes
+					{
+						createAsSimpleObject=1;
+					};
+					id=43;
+					type="Land_Trophy_01_gold_F";
+					atlOffset=0.10282135;
+				};
+				class Item5
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={5830.2271,9.2673664,10515.063};
+						angles[]={0,1.0490702,0};
+					};
+					side="Empty";
+					class Attributes
+					{
+						createAsSimpleObject=1;
+					};
+					id=44;
+					type="Land_Trophy_01_silver_F";
+					atlOffset=1.0049191;
+				};
+				class Item6
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={5830.4458,9.2673664,10514.646};
+						angles[]={0,1.0490702,0};
+					};
+					side="Empty";
+					class Attributes
+					{
+						createAsSimpleObject=1;
+					};
+					id=45;
+					type="Land_Trophy_01_silver_F";
+					atlOffset=1.0049191;
+				};
+				class Item7
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={5830.168,8.8146887,10515.22};
+						angles[]={0,1.0591376,0};
+					};
+					side="Empty";
+					class Attributes
+					{
+						createAsSimpleObject=1;
+					};
+					id=46;
+					type="Land_Trophy_01_bronze_F";
+					atlOffset=0.55224133;
+				};
+				class Item8
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={5830.4658,8.813611,10514.674};
+						angles[]={0,1.0591376,0};
+					};
+					side="Empty";
+					class Attributes
+					{
+						createAsSimpleObject=1;
+					};
+					id=47;
+					type="Land_Trophy_01_bronze_F";
+					atlOffset=0.55116367;
+				};
+				class Item9
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={5830.3608,8.3596563,10514.824};
+						angles[]={0,1.079595,0};
+					};
+					side="Empty";
+					flags=4;
+					class Attributes
+					{
+						createAsSimpleObject=1;
+					};
+					id=48;
+					type="Land_Trophy_01_bronze_F";
+					atlOffset=0.097208977;
+				};
+				class Item10
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={5830.3262,9.2673635,10514.86};
+						angles[]={0,1.0490702,0};
+					};
+					side="Empty";
+					class Attributes
+					{
+						createAsSimpleObject=1;
+					};
+					id=49;
+					type="Land_Trophy_01_silver_F";
+					atlOffset=1.0049162;
+				};
+				class Item11
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={5830.2412,8.364994,10515.046};
+						angles[]={0,1.079595,0};
+					};
+					side="Empty";
+					flags=4;
+					class Attributes
+					{
+						createAsSimpleObject=1;
+					};
+					id=50;
+					type="Land_Trophy_01_gold_F";
+					atlOffset=0.10254669;
+				};
+			};
+			id=51;
+			atlOffset=0.39177036;
+		};
+		class Item25
+		{
+			dataType="Group";
+			side="Civilian";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={5828.8071,8.1289148,10516.714};
+						angles[]={0,4.0821953,0};
+					};
+					side="Civilian";
+					flags=7;
+					class Attributes
+					{
+					};
+					id=53;
+					type="C_man_sport_1_F_asia";
+					atlOffset=0.0094909668;
+				};
+			};
+			class Attributes
+			{
+			};
+			id=52;
+			atlOffset=0.0094909668;
+		};
+		class Item26
+		{
+			dataType="Marker";
+			position[]={5964.3726,0,10505.688};
+			name="m_madridapartments";
+			type="Empty";
+			angle=155.569;
+			id=57;
+			atlOffset=-21.18;
+		};
+		class Item27
+		{
+			dataType="Marker";
+			position[]={5962.1211,0,10510.551};
+			name="madridapartments_pickup";
+			type="Empty";
+			angle=150.84599;
+			id=58;
+			atlOffset=-21.18;
+		};
+		class Item28
+		{
+			dataType="Trigger";
+			position[]={5964.7622,25.540001,10504.047};
+			angle=2.6529868;
+			class Attributes
+			{
+				name="tArrivedAtmadridapartments";
+				text="Arrived at Madrid Apartments";
+				onActivation="[""madridapartments""] call dingus_fnc_arrivedAtLocation;";
+				onDeactivation="[""madridapartments""] call dingus_fnc_departedLocation;";
+				sizeA=10.19;
+				sizeB=7.961;
+				sizeC=5;
+				repeatable=1;
+				isRectangle=1;
+			};
+			id=59;
+			type="EmptyDetectorArea10x10";
+			atlOffset=4.3600006;
+		};
+		class Item29
+		{
+			dataType="Marker";
+			position[]={5966.415,0,10524.694};
+			name="madridapartments_arrivals";
+			type="Empty";
+			angle=324.97665;
+			id=61;
+			atlOffset=-21.18;
+		};
+		class Item30
+		{
+			dataType="Group";
+			side="Civilian";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={5964.0151,21.476294,10526.5};
+						angles[]={0,2.4822712,0};
+					};
+					side="Civilian";
+					flags=7;
+					class Attributes
+					{
+					};
+					id=63;
+					type="C_man_polo_6_F_asia";
+					atlOffset=0.20382309;
+				};
+			};
+			class Attributes
+			{
+			};
+			id=62;
+			atlOffset=0.20382309;
+		};
+		class Item31
+		{
+			dataType="Group";
+			side="Civilian";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={5434.375,4.0413485,11906.252};
+						angles[]={0,3.8753219,0};
+					};
+					side="Civilian";
+					flags=7;
+					class Attributes
+					{
+					};
+					id=67;
+					type="C_Man_casual_4_F_tanoan";
+					atlOffset=-9.059906e-005;
+				};
+			};
+			class Attributes
+			{
+			};
+			id=66;
+			atlOffset=-9.059906e-005;
+		};
+		class Item32
+		{
+			dataType="Trigger";
+			position[]={5831.8701,8.7910004,10804.014};
+			angle=6.0259757;
+			class Attributes
+			{
+				name="tArrivedAtsupermarket";
+				text="Arrived at Supermarket";
+				onActivation="[""supermarket""] call dingus_fnc_arrivedAtLocation;";
+				onDeactivation="[""supermarket""] call dingus_fnc_departedLocation;";
+				sizeA=11.961;
+				sizeB=3.461;
+				sizeC=5;
+				repeatable=1;
+				isRectangle=1;
+			};
+			id=68;
+			type="EmptyDetectorArea10x10";
+			atlOffset=4.3610005;
+		};
+		class Item33
+		{
+			dataType="Marker";
+			position[]={5820.3569,0,10806.847};
+			name="m_supermarket";
+			type="Empty";
+			id=69;
+			atlOffset=-4.5109692;
+		};
+		class Item34
+		{
+			dataType="Marker";
+			position[]={5822.0581,0,10804.785};
+			name="supermarket_pickup";
+			type="Empty";
+			angle=178.54495;
+			id=70;
+			atlOffset=-4.4763255;
+		};
+		class Item35
+		{
+			dataType="Trigger";
+			position[]={5850.6899,8.7910004,10829.082};
+			angle=2.9512534;
+			class Attributes
+			{
+				name="tArrivedAtcoconutcafe";
+				text="Arrived at Coconut Cafe";
+				onActivation="[""coconutcafe""] call dingus_fnc_arrivedAtLocation;";
+				onDeactivation="[""coconutcafe""] call dingus_fnc_departedLocation;";
+				sizeA=2.707;
+				sizeB=6.0549998;
+				sizeC=5;
+				repeatable=1;
+				isRectangle=1;
+			};
+			id=71;
+			type="EmptyDetectorArea10x10";
+			atlOffset=4.3610005;
+		};
+		class Item36
+		{
+			dataType="Marker";
+			position[]={5848.4009,0,10835.735};
+			name="m_coconutcafe";
+			type="Empty";
+			id=72;
+			atlOffset=-4.425736;
+		};
+		class Item37
+		{
+			dataType="Marker";
+			position[]={5849.9102,0,10836.81};
+			name="coconutcafe_pickup";
+			type="Empty";
+			angle=178.54495;
+			id=73;
+			atlOffset=-4.4297605;
+		};
+		class Item38
+		{
+			dataType="Trigger";
+			position[]={5713.4609,3.8615971,10499.174};
+			angle=5.1468811;
+			class Attributes
+			{
+				name="tArrivedAtgeidishardware";
+				text="Arrived at Geidi's Hardware";
+				onActivation="[""geidishardware""] call dingus_fnc_arrivedAtLocation;";
+				onDeactivation="[""geidishardware""] call dingus_fnc_departedLocation;";
+				sizeA=8.4094057;
+				sizeB=1.8696898;
+				sizeC=2.0686283;
+				repeatable=1;
+				isRectangle=1;
+			};
+			id=74;
+			type="EmptyDetectorArea10x10";
+			atlOffset=1.3213005;
+		};
+		class Item39
+		{
+			dataType="Marker";
+			position[]={5713.584,0,10499.608};
+			name="m_geidishardware";
+			type="Empty";
+			id=75;
+			atlOffset=-2.4131274;
+		};
+		class Item40
+		{
+			dataType="Marker";
+			position[]={5715.6338,0,10502.888};
+			name="geidishardware_pickup";
+			type="Empty";
+			angle=113.87595;
+			id=76;
+			atlOffset=-2.4056787;
+		};
+		class Item41
+		{
+			dataType="Group";
+			side="Civilian";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={6121.8008,48.510674,10388.979};
+						angles[]={0,5.3267603,0};
+					};
+					side="Civilian";
+					flags=7;
+					class Attributes
+					{
+					};
+					id=80;
+					type="C_man_polo_3_F";
+					atlOffset=6.1035156e-005;
+				};
+			};
+			class Attributes
+			{
+			};
+			id=79;
+			atlOffset=6.1035156e-005;
+		};
+		class Item42
+		{
+			dataType="Trigger";
+			position[]={6121.9141,49.768478,10394.976};
+			angle=0.70832443;
+			class Attributes
+			{
+				name="tArrivedAtprivateresidence1";
+				text="Arrived at Private Residence";
+				onActivation="[""privateresidence1""] call dingus_fnc_arrivedAtLocation;";
+				onDeactivation="[""privateresidence1""] call dingus_fnc_departedLocation;";
+				sizeA=6.7493367;
+				sizeB=9.467864;
+				sizeC=1.8617935;
+				repeatable=1;
+				isRectangle=1;
+			};
+			id=81;
+			type="EmptyDetectorArea10x10";
+			atlOffset=1.1998444;
+		};
+		class Item43
+		{
+			dataType="Marker";
+			position[]={6122.5439,0,10396.369};
+			name="m_privateresidence1";
+			type="Empty";
+			angle=288.37094;
+			id=82;
+			atlOffset=-48.557552;
+		};
+		class Item44
+		{
+			dataType="Marker";
+			position[]={6121.748,48.523438,10388.896};
+			name="kuntismart_pickup_1";
+			type="Empty";
+			angle=319.42667;
+			id=83;
+			atlOffset=0.011772156;
+		};
+	};
+	class Connections
+	{
+		class LinkIDProvider
+		{
+			nextID=8;
+		};
+		class Links
+		{
+			items=8;
+			class Item0
+			{
+				linkID=0;
+				item0=1;
+				item1=13;
+				class CustomData
+				{
+					type="TriggerOwner";
+				};
+			};
+			class Item1
+			{
+				linkID=1;
+				item0=1;
+				item1=20;
+				class CustomData
+				{
+					type="TriggerOwner";
+				};
+			};
+			class Item2
+			{
+				linkID=2;
+				item0=1;
+				item1=29;
+				class CustomData
+				{
+					type="TriggerOwner";
+				};
+			};
+			class Item3
+			{
+				linkID=3;
+				item0=1;
+				item1=59;
+				class CustomData
+				{
+					type="TriggerOwner";
+				};
+			};
+			class Item4
+			{
+				linkID=4;
+				item0=1;
+				item1=71;
+				class CustomData
+				{
+					type="TriggerOwner";
+				};
+			};
+			class Item5
+			{
+				linkID=5;
+				item0=1;
+				item1=68;
+				class CustomData
+				{
+					type="TriggerOwner";
+				};
+			};
+			class Item6
+			{
+				linkID=6;
+				item0=1;
+				item1=74;
+				class CustomData
+				{
+					type="TriggerOwner";
+				};
+			};
+			class Item7
+			{
+				linkID=7;
+				item0=1;
+				item1=81;
+				class CustomData
+				{
+					type="TriggerOwner";
+				};
+			};
+		};
+	};
+};
