@@ -28,9 +28,9 @@ I don't like how the passengers respawn right now. It's too quick. I should add 
 */
 
 dingus_fnc_initializeLocations = {
-  _markers = ["m_georgetownchurch", "m_fishdocks", "m_kuntismart", "m_madridapartments", "m_supermarket", "m_coconutcafe", "m_geidishardware", "m_privateresidence1", "m_beautysalon", "m_pharmacy", "m_hardwarestore", "joksgym"];
+  _markers = ["m_georgetownchurch", "m_fishdocks", "m_kuntismart", "m_madridapartments", "m_supermarket", "m_coconutcafe", "m_geidishardware", "m_privateresidence1", "m_beautysalon", "m_pharmacy", "m_hardwarestore", "m_joksgym"];
   _codes = ["georgetownchurch", "fishdocks", "kuntismart", "madridapartments", "supermarket", "coconutcafe", "geidishardware", "privateresidence1", "beautysalon", "pharmacy", "hardwarestore", "joksgym"];
-  _names = ["Georgetown Church", "Fish Docks", "Kuntis Mart", "Madrid Apartments", "Foodhaul Supermarket", "Coconut Cafe", "Geidi's Hardware", "Private Residence", "Beauty Salon", "Pharmacy", "Hardware Store", "Jok's Gym"];
+  _names = ["Georgetown Church", "Fish Docks", "Kuntis Mart", "Madrid Apartments", "Foodhaul Supermarket", "Coconet Cafe", "Geidi's Hardware", "Private Residence", "Beauty Salon", "Pharmacy", "Hardware Store", "Jok's Gym"];
 
   //
 
@@ -271,7 +271,8 @@ dingus_fnc_createPassengerGroup = {
 
   //Create leader
   _leader = _group createUnit [_models select floor random count _models, (getMarkerPos _marker), [], 0.5, "FORM"];
-  _leader lookAt (markerPos _lookMarker) select 2;
+  //_leader lookAt (markerPos _lookMarker) select 2;
+  _leader setDir (markerDir _marker);
 
   //Apply a loadout to this guy
   [_leader] call dingus_fnc_ApplyPassengerLoadout;

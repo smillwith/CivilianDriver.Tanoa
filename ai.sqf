@@ -2,7 +2,7 @@ dingus_fnc_spawnAI = {
 
   //Randomly generated drivers
   _markers = [] call dingus_fnc_getDriverMarkers;
-  _maxDrivers = 10;
+  _maxDrivers = 15;
   _driverIdx = 0;
   while { _driverIdx <= _maxDrivers } do {
     //Create a vehicle, group and leader
@@ -32,7 +32,7 @@ dingus_fnc_spawnAI = {
 dingus_fnc_getDriverMarkers = {
   //populate the markers array dynamically
   _midx = 0;
-  _mmax = 13;
+  _mmax = 17;
   _markers = [];
 
   while {_midx <= _mmax} do {
