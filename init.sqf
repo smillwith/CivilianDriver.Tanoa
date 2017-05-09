@@ -16,5 +16,14 @@ waitUntil { scriptDone _handle };
 
 ["CurrentPassenger", nil] call dingus_fnc_setVar;
 
-execVM "passengers.sqf";
 execVM "vehicleHelpers.sqf";
+
+//Initialize locations and passengers
+_handle2 = execVM "passengers.sqf";
+waitUntil { scriptDone _handle2 };
+[] call dingus_fnc_initializeLocations;
+
+
+_handle3 = execVM "ai.sqf";
+waitUntil { scriptDone _handle3 };
+[] call dingus_fnc_spawnAI;

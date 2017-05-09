@@ -27,25 +27,45 @@ I don't like how the passengers respawn right now. It's too quick. I should add 
 
 */
 
+dingus_fnc_initializeLocations = {
+  _markers = ["m_georgetownchurch", "m_fishdocks", "m_kuntismart", "m_madridapartments", "m_supermarket", "m_coconutcafe", "m_geidishardware", "m_privateresidence1", "m_beautysalon", "m_pharmacy", "m_hardwarestore", "joksgym"];
+  _codes = ["georgetownchurch", "fishdocks", "kuntismart", "madridapartments", "supermarket", "coconutcafe", "geidishardware", "privateresidence1", "beautysalon", "pharmacy", "hardwarestore", "joksgym"];
+  _names = ["Georgetown Church", "Fish Docks", "Kuntis Mart", "Madrid Apartments", "Foodhaul Supermarket", "Coconut Cafe", "Geidi's Hardware", "Private Residence", "Beauty Salon", "Pharmacy", "Hardware Store", "Jok's Gym"];
+
+  //
+
+  ["LocationMarkers", _markers] call dingus_fnc_setVar;
+  ["LocationCodes", _codes] call dingus_fnc_setVar;
+  ["LocationNames", _names] call dingus_fnc_setVar;
+
+  {
+    [_x] call dingus_fnc_createPassengerGroup;
+  } forEach _codes;
+};
+
 dingus_fnc_initializePassengers = {
   //We need to make sure passengers are available at MOST if not all locations right from the start
 
   //[passenger1, "fishdocks"] call dingus_fnc_AddPassengerBoardingAction;
   //[passenger2, "georgetownchurch"] call dingus_fnc_AddPassengerBoardingAction;
   //[passenger3, "kuntismart"] call dingus_fnc_AddPassengerBoardingAction;
+
+  //_airportMarkers = ["LocationMarkers", []] call dingus_fnc_getVar;
+  //_airportCodes = ["LocationCodes", []] call dingus_fnc_getVar;
+  //_airportNames = ["LocationNames", []] call dingus_fnc_getVar;
 };
 
 
 dingus_fnc_PassengersBoarding = {
   params ["_unit", "_code"];
 
-  //systemChat 'boarding with code: ' + _code;
-
   //Only use 'code' param if it is given and if it is the same as the current airport. Otherwise, current airport takes precedence.
   if (isNil "_code" || _code == "") then {
     systemChat 'Using current code instead';
     _code = ["CurrentLocation", ""] call dingus_fnc_getVar;
   };
+
+  systemChat 'boarding with code: ' + _code;
 
   _vehicle = ["CurrentVehicle"] call dingus_fnc_getVar;
 
@@ -78,9 +98,13 @@ dingus_fnc_PassengersBoarding = {
 //TODO: We should actually call this from a trigger
 dingus_fnc_OnPassengersLoaded = {
   params ["_currentCode"];
-  _airportMarkers = ["m_georgetownchurch", "m_fishdocks", "m_kuntismart", "m_madridapartments", "m_supermarket", "m_coconutcafe", "m_geidishardware", "m_privateresidence1"];
-  _airportCodes = ["georgetownchurch", "fishdocks", "kuntismart", "madridapartments", "supermarket", "coconutcafe", "geidishardware", "privateresidence1"];
-  _airportNames = ["Georgetown Church", "Fish Docks", "Kuntis Mart", "Madrid Apartments", "Foodhaul Supermarket", "Coconut Cafe", "Geidi's Hardware", "Private Residence"];
+  //_airportMarkers = ["m_georgetownchurch", "m_fishdocks", "m_kuntismart", "m_madridapartments", "m_supermarket", "m_coconutcafe", "m_geidishardware", "m_privateresidence1"];
+  //_airportCodes = ["georgetownchurch", "fishdocks", "kuntismart", "madridapartments", "supermarket", "coconutcafe", "geidishardware", "privateresidence1"];
+  //_airportNames = ["Georgetown Church", "Fish Docks", "Kuntis Mart", "Madrid Apartments", "Foodhaul Supermarket", "Coconut Cafe", "Geidi's Hardware", "Private Residence"];
+
+  _airportMarkers = ["LocationMarkers", []] call dingus_fnc_getVar;
+  _airportCodes = ["LocationCodes", []] call dingus_fnc_getVar;
+  _airportNames = ["LocationNames", []] call dingus_fnc_getVar;
 
   _found = false;
   _name = "";
@@ -156,7 +180,7 @@ dingus_fnc_DepartedLocation = {
   params ["_code"];
 
   //When we leave a location, we clear the name and other vitals
-  ["CurrentLocation", ""] call dingus_fnc_setVar;
+  //["CurrentLocation", ""] call dingus_fnc_setVar;
   //["CurrentFuelTruck", nil] call dingus_fnc_setVar;
   //["CurrentRepairTruck", nil] call dingus_fnc_setVar;
 
@@ -235,18 +259,19 @@ dingus_fnc_createPassengerGroup = {
 
   _models = ["C_Man_casual_1_F_tanoan", "C_man_sport_1_F_afro", "C_Man_casual_1_F_asia", "C_man_1", "C_man_p_beggar_F"];
   _marker = _code + "_pickup";
+  _lookMarker = format ["m_%1", _code];
   //_markerRunway =  "m_airport_" + _code;
   _group = createGroup [civilian, true];
 
   //Set formation
-  _group setFormation "COLUMN";
+  _group setFormation "FILE";
   _group setBehaviour "CARELESS";
 
   //systemChat format ["%1", (getMarkerPos _marker)];
 
   //Create leader
   _leader = _group createUnit [_models select floor random count _models, (getMarkerPos _marker), [], 0.5, "FORM"];
-  //_leader lookAt (getMarkerPos _markerRunway select 3);
+  _leader lookAt (markerPos _lookMarker) select 2;
 
   //Apply a loadout to this guy
   [_leader] call dingus_fnc_ApplyPassengerLoadout;
@@ -261,7 +286,6 @@ dingus_fnc_createPassengerGroup = {
 
   //Add action to leader
   [_leader, _code] call dingus_fnc_AddPassengerBoardingAction;
-  [format ["NextPassenger%1", _code], _leader] call dingus_fnc_setVar;
 
   //Save this passenger in vars
   [format ["NextPassenger%1", _code], _leader] call dingus_fnc_setVar;
@@ -301,9 +325,16 @@ dingus_fnc_PassengersCanBoard = {
 dingus_fnc_AddPassengerBoardingAction = {
   params ["_leader", "_code"];
 
-  _label = ["Hello, I'm your driver. Sit anywhere you like!"] call dingus_fnc_formatActionLabel;
+  _greetings = ["What up! I'm your driver. Hop in!", "Hello, I'm your driver. Sit anywhere you like!", "Hello there. Do you need a ride? Hop in!", "Where are you headed?"];
 
-  switch (_code) do {
+  _label = [_greetings select floor random count _greetings] call dingus_fnc_formatActionLabel;
+
+  //We aren't sending over their starting location anymore...does it cause duplicates?
+  _leader addAction [_label, {
+    [_this select 0, ""] call dingus_fnc_PassengersBoarding;
+  }, [], 45, true, true, "", "[] call dingus_fnc_PassengersCanBoard"];
+
+  /*switch (_code) do {
     case "fishdocks": {
       _leader addAction [_label, {
         [_this select 0, "fishdocks"] call dingus_fnc_PassengersBoarding;
@@ -344,7 +375,7 @@ dingus_fnc_AddPassengerBoardingAction = {
         [_this select 0, "privateresidence1"] call dingus_fnc_PassengersBoarding;
       }, [], 45, true, true, "", "[] call dingus_fnc_PassengersCanBoard"];
     };
-  };
+  };*/
 };
 
 dingus_fnc_PassengersCanUnload = {
