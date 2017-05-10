@@ -9,11 +9,9 @@ waitUntil { scriptDone _handle };
 ["Arrived", "0"] call dingus_fnc_setVar;
 
 ["CurrentLocation", ""] call dingus_fnc_setVar;
-
 ["DestinationLocation", ""] call dingus_fnc_setVar;
 
 ["CurrentVehicle", car1] call dingus_fnc_setVar;
-
 ["CurrentPassenger", nil] call dingus_fnc_setVar;
 
 execVM "vehicleHelpers.sqf";

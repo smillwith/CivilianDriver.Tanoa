@@ -360,4 +360,3 @@ dingus_fnc_AddPassengerUnloadAction = {
   }, [], 45, false, true, "", "[] call dingus_fnc_PassengersCanUnload"];
 };
 
-

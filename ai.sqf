@@ -1,5 +1,4 @@
 dingus_fnc_spawnAI = {
-
   //Randomly generated drivers
   _markers = [] call dingus_fnc_getDriverMarkers;
   _maxDrivers = 11;

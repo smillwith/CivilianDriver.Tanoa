@@ -59,12 +59,6 @@ dingus_fnc_initInfoStand = {
   _item addAction ["Weather: Clear", {[] call dingus_fnc_SetClear;}, [], 45, false, true, "", "((rain > 0) || (overcast > 0.10))"];
   _item addAction ["Weather: Cloudy", {[] call dingus_fnc_SetCloudy;}, [], 45, false, true, "", "overcast < 0.5"];
   _item addAction ["Weather: Rainy", {[] call dingus_fnc_SetRainy;}, [], 45, false, true, "", "rain < 0.8"];
-
-  //_item addAction ["Turn Location Markers ON", {[] call dingus_fnc_ToggleLocationMarkers;}, [], 45, false, true, "", "[""TaskLocations"", ""1""] call dingus_fnc_getVar == ""0"""];
-  //_item addAction ["Turn Location Markers OFF", {[] call dingus_fnc_ToggleLocationMarkers;}, [], 45, false, true, "", "[""TaskLocations"", ""1""] call dingus_fnc_getVar == ""1"""];
-
-  //_item addAction ["Turn Landing Aids ON", {[] call dingus_fnc_enableLandingAids;}, [], 0.45, false, true, "", "([""HelpersVisible"", ""0""] call dingus_fnc_getVar) == ""0"""];
-  //_item addAction ["Turn Landing Aids OFF", {[] call dingus_fnc_disableLandingAids;}, [], 0.45, false, true, "", "([""HelpersVisible"", ""0""] call dingus_fnc_getVar) == ""1"""];
 };
 
 dingus_fnc_ToggleLocationMarkers = {
@@ -113,7 +107,3 @@ dingus_fnc_formatActionLabel = {
   _label = "<t color='#228A37'>" + _text + "</t>";
   _label;
 };
-
-
-//true;
-
