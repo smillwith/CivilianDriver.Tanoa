@@ -2,17 +2,18 @@ dingus_fnc_spawnAI = {
 
   //Randomly generated drivers
   _markers = [] call dingus_fnc_getDriverMarkers;
-  _maxDrivers = 15;
+  _maxDrivers = 11;
   _driverIdx = 0;
   while { _driverIdx <= _maxDrivers } do {
     //Create a vehicle, group and leader
     _startingMarker = _markers select floor random count _markers;
     _models = ["C_Man_casual_1_F_tanoan", "C_man_sport_1_F_afro", "C_Man_casual_1_F_asia", "C_man_1"];
-    _vehicles = ["C_Offroad_02_unarmed_F", "C_Hatchback_01_F", "C_Offroad_01_F", "C_Hatchback_01_F", "C_Hatchback_01_F", "C_Hatchback_01_sport_F"];
+    _vehicles = ["C_Offroad_02_unarmed_F", "C_Hatchback_01_F", "C_Offroad_01_F", "C_Hatchback_01_F", "C_Hatchback_01_F", "C_Hatchback_01_sport_F", "B_GEN_Offroad_01_gen_F"];
     _group = createGroup [civilian, true];
-    _group setFormation "FILE";
+    _group setFormation "LINE";
     _group setBehaviour "SAFE";
     _vehicle = (_vehicles select floor random count _vehicles) createVehicle (getMarkerPos _startingMarker);
+    _vehicle allowDamage false;
     _leader = _group createUnit [_models select floor random count _models, (getMarkerPos _startingMarker), [], 2, "NONE"];
     _leader assignAsDriver _vehicle;
     
@@ -32,7 +33,7 @@ dingus_fnc_spawnAI = {
 dingus_fnc_getDriverMarkers = {
   //populate the markers array dynamically
   _midx = 0;
-  _mmax = 17;
+  _mmax = 23;      // <--- Update to use the total number of blank markers for drivers
   _markers = [];
 
   while {_midx <= _mmax} do {
@@ -46,7 +47,6 @@ dingus_fnc_getDriverMarkers = {
 dingus_fnc_addDriverWaypoints = {
   params ["_unit"];
 
-  //_markers = ['driver_waypoint_0', 'driver_waypoint_1', 'driver_waypoint_2', 'driver_waypoint_3', 'driver_waypoint_4'];
   _markers = [] call dingus_fnc_getDriverMarkers;
 
   //systemChat format ['creating waypoints for: %1', _unit];
