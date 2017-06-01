@@ -1,28 +1,37 @@
 dingus_fnc_spawnAI = {
+  _models = ["C_Man_casual_1_F_tanoan", "C_man_sport_1_F_afro", "C_Man_casual_1_F_asia", "C_man_1"];
+  _vehicles = ["C_Offroad_02_unarmed_F", "C_Hatchback_01_F", "C_Offroad_01_F", "C_Hatchback_01_F", "C_Hatchback_01_F", "C_Hatchback_01_sport_F", "B_GEN_Offroad_01_gen_F"];
+
   //Randomly generated drivers
   _markers = [] call dingus_fnc_getDriverMarkers;
-  _maxDrivers = 11;
+  _maxDrivers = 5;   //<--- MAX DRIVERS per Call
   _driverIdx = 0;
-  while { _driverIdx <= _maxDrivers } do {
+  _markerIdx = 0;
+
+  while { ((_driverIdx < _maxDrivers) && (_markerIdx < count _markers)) } do {
     //Create a vehicle, group and leader
-    _startingMarker = _markers select floor random count _markers;
-    _models = ["C_Man_casual_1_F_tanoan", "C_man_sport_1_F_afro", "C_Man_casual_1_F_asia", "C_man_1"];
-    _vehicles = ["C_Offroad_02_unarmed_F", "C_Hatchback_01_F", "C_Offroad_01_F", "C_Hatchback_01_F", "C_Hatchback_01_F", "C_Hatchback_01_sport_F", "B_GEN_Offroad_01_gen_F"];
+    //_startingMarker = _markers select floor random count _markers;
+    _startingMarker = (_markers select _markerIdx);
+
     _group = createGroup [civilian, true];
     _group setFormation "LINE";
     _group setBehaviour "SAFE";
+
     _vehicle = (_vehicles select floor random count _vehicles) createVehicle (getMarkerPos _startingMarker);
     _vehicle allowDamage false;
+
     _leader = _group createUnit [_models select floor random count _models, (getMarkerPos _startingMarker), [], 2, "NONE"];
     _leader assignAsDriver _vehicle;
-    
-    //Get in, assign way points
     [_leader] orderGetIn true;
     [_leader] call dingus_fnc_addDriverWaypoints;
     
-    _driverIdx = _driverIdx + 1;
+    _driverIdx = (_driverIdx + 1);
+    _markerIdx = (_markerIdx + 1);
+    //sleep 0.05;
   };
+};
 
+dingus_fnc_spawnFixedAI = {
   //For the existing, fixed drivers
   {
     [_x] call dingus_fnc_addDriverWaypoints;
@@ -32,7 +41,7 @@ dingus_fnc_spawnAI = {
 dingus_fnc_getDriverMarkers = {
   //populate the markers array dynamically
   _midx = 0;
-  _mmax = 23;      // <--- Update to use the total number of blank markers for drivers
+  _mmax = 27;      // <--- Update to use the total number of blank markers for drivers
   _markers = [];
 
   while {_midx <= _mmax} do {
@@ -70,7 +79,7 @@ dingus_fnc_addDriverWaypoints = {
   };
 
   //Add a cycle waypoint?
-  _wpc = (group _unit) addWaypoint [_startingPos, _idx + 1];
+  _wpc = (group _unit) addWaypoint [_startingPos, _idx];
   _wpc setWaypointType "CYCLE";
   _wpc setWaypointStatements ["true", "hint 'hello';"];
 };

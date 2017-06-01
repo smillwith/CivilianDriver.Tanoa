@@ -59,6 +59,8 @@ dingus_fnc_initInfoStand = {
   _item addAction ["Weather: Clear", {[] call dingus_fnc_SetClear;}, [], 45, false, true, "", "((rain > 0) || (overcast > 0.10))"];
   _item addAction ["Weather: Cloudy", {[] call dingus_fnc_SetCloudy;}, [], 45, false, true, "", "overcast < 0.5"];
   _item addAction ["Weather: Rainy", {[] call dingus_fnc_SetRainy;}, [], 45, false, true, "", "rain < 0.8"];
+
+  _item addAction ["Spawn more AI drivers", {[] call dingus_fnc_spawnAI;}, [], 99, false, true, "", "count allUnits < 200"];
 };
 
 dingus_fnc_ToggleLocationMarkers = {

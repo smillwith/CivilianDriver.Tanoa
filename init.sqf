@@ -21,7 +21,7 @@ _handle2 = execVM "passengers.sqf";
 waitUntil { scriptDone _handle2 };
 [] call dingus_fnc_initializeLocations;
 
-
+//Initialize Passengers
 _handle3 = execVM "ai.sqf";
 waitUntil { scriptDone _handle3 };
-[] call dingus_fnc_spawnAI;
+[] call dingus_fnc_spawnFixedAI;

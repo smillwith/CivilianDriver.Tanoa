@@ -2,10 +2,11 @@
 
 1. when I drop someone off, their action is no longer valid (unless we re-enable that code). it's supposed to prevent them from being assigned to the current location
   - Option 1: Re-enable the code that checks for 'current location' and uses it if the two are different
-  - Option 2: Remove units that have been dropped off
+  - Option 2: Remove units that have been dropped off (done)
 
 2. when I leave an area we automatically spawn someone new. We don't need to if there is already someone there.
   - Option 1: Use variables to solve this. When we spawn someone, set a var for that location. Don't re-gen if there is already a value in that var (fishdockspassenger)
+  - Done
 
 3. If you damage your vehicle and he pops out of your vehicle how do you get him back in to one?
 
@@ -17,59 +18,69 @@ Add traffic dynamically
 
 Merge the two together, and make it multiplayer?
 
-New"
+New:
 
-Place where people can spawn but it not be a drop off (eg taxi stand)
-
-Should we make a task for picking up the next person?
-
+Create a Place where people can spawn but it not be a drop off (eg taxi stand)
+Should we make a task for picking up the first/next person?
 I don't like how the passengers respawn right now. It's too quick. I should add a delay to the triggers
 
+The markers the AI use aren't quite accurate. Mostly, the AI pulls in 'short' of their intended location
+Implement the percentage chance that a unit will spawn there
 */
 
 dingus_fnc_initializeLocations = {
-  _markers = ["m_georgetownchurch", "m_fishdocks", "m_kuntismart", "m_madridapartments", "m_supermarket", "m_coconutcafe", "m_geidishardware", "m_privateresidence1", "m_privateresidence2", "m_privateresidence3", "m_beautysalon", "m_pharmacy", "m_hardwarestore", "m_joksgym", "m_outdoormarket", "m_chelsealofts", "m_pcrepairshop", "m_butchershop", "m_fishmarket", "m_movieworld", "m_georgetownspa"];
-  _codes = ["georgetownchurch", "fishdocks", "kuntismart", "madridapartments", "supermarket", "coconutcafe", "geidishardware", "privateresidence1", "privateresidence2", "privateresidence3", "beautysalon", "pharmacy", "hardwarestore", "joksgym", "outdoormarket", "chelsealofts", "pcrepairshop", "butchershop", "fishmarket", "movieworld", "georgetownspa"];
-  _names = ["Georgetown Church", "Fish Docks", "Kuntis Mart", "Madrid Apartments", "Foodhaul Supermarket", "Coconet Cafe North", "Geidi's Hardware", "Private Residence", "Private Residence", "Private Residence", "Beauty Salon", "Pharmacy", "Hardware Store", "Jok's Gym", "Outdoor Market", "Chelsea Lofts", "PC Repair Shop", "Butcher Shop", "Fish Market", "Movie World", "Georgetown Spa"];
 
-  //
+  //These two should be kept in exact sync. 1 for 1 in each array (location code and location name)
+  _codes = ["recyclingcenter", "georgetownchurch", "fishdocks", "kuntismart", "madridapartments", "supermarket", "coconutcafe", "geidishardware", "privateresidence1", "privateresidence2", "privateresidence3", "beautysalon", "pharmacy", "hardwarestore", "joksgym", "outdoormarket", "chelsealofts", "pcrepairshop", "butchershop", "fishmarket", "movieworld", "georgetownspa", "cemetary"];
+  _names = ["Recycling Center", "Georgetown Church", "Fish Docks", "Kuntis Mart", "Madrid Apartments", "Foodhaul Supermarket", "Coconet Cafe North", "Geidi's Hardware", "Private Residence", "Private Residence", "Private Residence", "Beauty Salon", "Pharmacy", "Hardware Store", "Jok's Gym", "Outdoor Market", "Chelsea Lofts", "PC Repair Shop", "Butcher Shop", "Fish Market", "Movie World", "Georgetown Spa", "Georgetown Cemetary"];
 
-  ["LocationMarkers", _markers] call dingus_fnc_setVar;
+  //Pickup only markers
+  _pickupMarkers = ["taxistand1", "taxistand2", "taxistand3", "taxistand4", "taxistand5", "taxistand6", "taxistand7", "taxistand8", "taxistand9", "taxistand10", "taxistand11", "taxistand12"];
+
+  //["LocationMarkers", _destinationMarkers] call dingus_fnc_setVar;
+  ["PickupMarkers", _pickupMarkers] call dingus_fnc_setVar;
   ["LocationCodes", _codes] call dingus_fnc_setVar;
   ["LocationNames", _names] call dingus_fnc_setVar;
 
+  //Make sure we get a passenger at the first location
+  ["fishdocks"] call dingus_fnc_createPassengerGroup;
+
+  //Initialize all pickup markers
   {
     [_x] call dingus_fnc_createPassengerGroup;
-  } forEach _codes;
+  } forEach _pickupMarkers;
+
+
+  //TODO: Initialize the locations as well? If we do, it just means more AI but if we don't...we don't get all locations
+  
+
 };
 
-dingus_fnc_initializePassengers = {
-  //We need to make sure passengers are available at MOST if not all locations right from the start
-
-  //[passenger1, "fishdocks"] call dingus_fnc_AddPassengerBoardingAction;
-  //[passenger2, "georgetownchurch"] call dingus_fnc_AddPassengerBoardingAction;
-  //[passenger3, "kuntismart"] call dingus_fnc_AddPassengerBoardingAction;
-
-  //_airportMarkers = ["LocationMarkers", []] call dingus_fnc_getVar;
-  //_airportCodes = ["LocationCodes", []] call dingus_fnc_getVar;
-  //_airportNames = ["LocationNames", []] call dingus_fnc_getVar;
-};
+dingus_fnc_initializePassengers = {};
 
 
 dingus_fnc_PassengersBoarding = {
-  params ["_unit", "_code"];
+  params ["_unit"];
 
   //Only use 'code' param if it is given and if it is the same as the current airport. Otherwise, current airport takes precedence.
-  if (isNil "_code" || _code == "") then {
-    //systemChat 'Using current code instead';
+  //if (isNil {_code} || _code == "") then {
     _code = ["CurrentLocation", ""] call dingus_fnc_getVar;
-  };
+  //};
 
-  //systemChat format ['boarding with code: %1', _code];
+  //Use 'NextPassenger(Code)' to fill passenger if we have an empty passenger
+  if (isNil {_unit} || _unit == player) then {
+    systemChat format ["NextPassenger%1", _code];
+    _unit = ([format ["NextPassenger%1", _code], nil] call dingus_fnc_getVar);
+    if (isNil {_unit} || _unit == player || isNil {_group}) then {
+      systemChat 'unit still nil';
+    } else {
+      _group = group _unit;
+    };
+  };
 
   _vehicle = ["CurrentVehicle"] call dingus_fnc_getVar;
 
-  if (!isNil {_vehicle}) then {
+  if (!isNil {_vehicle} && !isNil {_unit}) then {
     ["Boarding", "1"] call dingus_fnc_setVar;
 
     {
@@ -87,7 +98,6 @@ dingus_fnc_PassengersBoarding = {
 
     //Safety check - if you just picked up the same passenger again, make sure we don't delete them when we leave the airport
     if ([format ["LastPassenger%1", _code], nil] call dingus_fnc_getVar == _unit) then {
-      //systemChat "Clearing previous passenger";
       [format ["LastPassenger%1", _code], nil] call dingus_fnc_setVar;
     } else {
       //systemChat "Previous passenger safe to delete.";
@@ -99,7 +109,7 @@ dingus_fnc_PassengersBoarding = {
 dingus_fnc_OnPassengersLoaded = {
   params ["_currentCode"];
   
-  _airportMarkers = ["LocationMarkers", []] call dingus_fnc_getVar;
+  //_airportMarkers = ["LocationMarkers", []] call dingus_fnc_getVar;
   _airportCodes = ["LocationCodes", []] call dingus_fnc_getVar;
   _airportNames = ["LocationNames", []] call dingus_fnc_getVar;
 
@@ -112,10 +122,10 @@ dingus_fnc_OnPassengersLoaded = {
 
   //Prevent destination from being the same as the current airport
   while { !_found && _count < 100 } do {
-    _idx = floor random count _airportMarkers;
-    _marker = _airportMarkers select _idx;
-    _name = _airportNames select _idx;
+    _idx = floor random count _airportCodes;
     _code = _airportCodes select _idx;
+    _marker = format ["m_%1", _code];
+    _name = _airportNames select _idx;
     _loc = getMarkerPos _marker;
     
     //Validate that the code isn't the same as the currently selected or supplied airport code
@@ -181,13 +191,22 @@ dingus_fnc_DepartedLocation = {
   //["CurrentFuelTruck", nil] call dingus_fnc_setVar;
   //["CurrentRepairTruck", nil] call dingus_fnc_setVar;
 
-  //Re-spawn the passenger group for this location
+  //Roll to see if we Re-spawn the passenger group for this location
+  _rnd = floor random 100;
   _existing = [format ["NextPassenger%1", _code], nil] call dingus_fnc_getVar;
-  if (isNil "_existing") then {
-    //systemChat 'boo';
-    [_code] call  dingus_fnc_createPassengerGroup;;
+
+  //Magic number - percentage change that we get a re-spawn
+  _respawnChance = 50;
+  if (isNil "_existing" && _rnd < _respawnChance) then {
+    //Respawn here
+    [_code] spawn {
+      sleep 3;
+      params ["_code"];
+      [_code] call  dingus_fnc_createPassengerGroup;
+    };
+
   } else {
-    //systemChat 'foo';
+    //Not creating a group here
   };
 
   //Delete previous passenger
@@ -213,7 +232,7 @@ dingus_fnc_ArrivedAtLocation = {
   _destinationAirport = ["DestinationLocation", ""] call dingus_fnc_getVar;
   _passenger = (["CurrentPassenger"] call dingus_fnc_getVar);
   _hasPassenger = (!isNil "_passenger");
-  systemChat format ['Passenger: %1', _hasPassenger];
+  //systemChat format ['Passenger: %1', _hasPassenger];
   if (_code == _destinationAirport && _hasPassenger) then {
     [] call dingus_fnc_PassengersArrived;
   };
@@ -245,6 +264,7 @@ dingus_fnc_PassengersUnloading = {
     _code = ["CurrentLocation", ""] call dingus_fnc_getVar;
     _marker = _code + "_arrivals";
     _wp = (group _passenger) addWaypoint [getMarkerPos _marker, 0];
+    _wp setWaypointSpeed "LIMITED";
 
     [format ["LastPassenger%1", _code], _passenger] call dingus_fnc_setVar;
   };
@@ -265,7 +285,7 @@ dingus_fnc_createPassengerGroup = {
   _group = createGroup [civilian, true];
 
   //Set formation
-  //_group setFormation "FILE";
+  _group setFormation "LINE";
   _group setBehaviour "SAFE";
 
   //systemChat format ["%1", (getMarkerPos _marker)];
@@ -275,7 +295,9 @@ dingus_fnc_createPassengerGroup = {
   //_leader lookAt (markerPos _lookMarker) select 2;
   _leader setFormDir (markerDir _marker);
   _leader setDir (markerDir _marker);
-  //_leader disableAI "AUTOCOMBAT";
+  _leader disableAI "AUTOCOMBAT";
+  _leader disableAI "TARGET";
+  _leader disableAI "FSM";
 
   //Apply a loadout to this guy
   [_leader] call dingus_fnc_ApplyPassengerLoadout;
@@ -284,13 +306,15 @@ dingus_fnc_createPassengerGroup = {
   _rnd = floor random 100;
 
   if (_rnd mod 2 == 0) then {
-    _two = _group createUnit [_models select floor random count _models, _group, [], 0.5, "NONE"];
+    _two = _group createUnit [_models select floor random count _models, _group, [], 0.5, "FORM"];
     [_two] call dingus_fnc_ApplyPassengerLoadout;
-    //_two disableAI "AUTOCOMBAT";
+    _two disableAI "AUTOCOMBAT";
+    _two disableAI "TARGET";
+    _two disableAI "FSM";
   };
 
   //Add action to leader
-  [_leader, _code] call dingus_fnc_AddPassengerBoardingAction;
+  [_leader] call dingus_fnc_AddPassengerBoardingAction;
 
   //Save this passenger in vars
   [format ["NextPassenger%1", _code], _leader] call dingus_fnc_setVar;
@@ -324,18 +348,25 @@ dingus_fnc_ApplyPassengerLoadout = {
 /* Action Helpers */
 
 dingus_fnc_PassengersCanBoard = {
-  (vehicle player == player && ((["Boarded", "0"] call dingus_fnc_getVar) == "0"));
+  _isInVehicle = (vehicle player != player);
+  _noPassengers = ((["Boarded", "0"] call dingus_fnc_getVar) == "0");
+  _location = ((["CurrentLocation"] call dingus_fnc_getVar) != "");
+  _stopped = (speed vehicle player < 0.1);
+  _nextPassenger = [format ["NextPassenger%1", _location], nil] call dingus_fnc_getVar;
+  _passengerAvailable = !isNil "_nextPassenger";
+  
+  //(_isInVehicle && _noPassengers && _stopped && _passengerAvailable);
+  //(_isInVehicle && _noPassengers && _stopped);
+  (_noPassengers);
 };
 
 dingus_fnc_AddPassengerBoardingAction = {
-  params ["_leader", "_code"];
-
+  params ["_unit"];
   _greetings = ["What up! I'm your driver. Hop in!", "Hello, I'm your driver. Sit anywhere you like!", "Hello there. Do you need a ride? Hop in!", "Where are you headed?"];
 
   _label = [_greetings select floor random count _greetings] call dingus_fnc_formatActionLabel;
 
-  //We aren't sending over their starting location anymore...does it cause duplicates?
-  _leader addAction [_label, {
+  _unit addAction [_label, {
     [_this select 0, ""] call dingus_fnc_PassengersBoarding;
   }, [], 45, true, true, "", "[] call dingus_fnc_PassengersCanBoard"];
 };
@@ -344,9 +375,9 @@ dingus_fnc_PassengersCanUnload = {
   _inVehicle = (vehicle player != player);
   _arrived = ((["Arrived", "0"] call dingus_fnc_getVar) == "1");
   _atDestination = ((["CurrentLocation", ""] call dingus_fnc_getVar) == (["DestinationLocation", ""] call dingus_fnc_getVar));
-  //TODO: Current passenger check
-
-  _inVehicle && _arrived && _atDestination;
+  _passenger = (["CurrentPassenger"] call dingus_fnc_getVar);
+  _hasPassenger = !isNil "_passenger";
+  _inVehicle && _arrived && _atDestination && _hasPassenger;
 };
 
 dingus_fnc_AddPassengerUnloadAction = {
